@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русский p0e.re</title>
+    <link rel="stylesheet" href="./styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="mainContainer">
+        <div class="outputFieldBG">
+            <div class="output" id="outputField">
+                Выберите хотя бы один из модов...
+            </div>
+            
+        </div>
+        <p id="symb">Символов: 0/50</p>
+        <div class="miscOptions" >
+            <p></p>
+            <label class="output1" id="output11"> 
+                Мин. кол-во предметов:  
+                <input type="textbox" class="textboxClass" id="quant">
+            </label>  
+            <p></p>
+            <label class="output1" id="output12"> 
+                Мин. кол-во мобов:  
+                <input type="textbox" class="textboxClass" id="packsize">
+            </label>  
+        </div>
+
+        
+
+
+        <div class="textcols">
+            <div class="textcols-item" id="firstCol" >
+                <label class="output1">Избегать моды: </label>
+                <p></p>
+            </div>
+            <div class="textcols-item" id="secondCol">
+                <label class="output1">Нужные моды: </label>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <script src="./deps/to-regex.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
