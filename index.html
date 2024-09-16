@@ -20,7 +20,9 @@
             <div class="output" id="outputField">
                 Выберите хотя бы один из модов...
             </div>
-            
+            <button class="button-28" role="button" onclick="copyContent()"></button>
+            <button class="button-29" role="button" onclick="clearAll()"></button>
+
         </div>
         <p id="symb">Символов: 0/50</p>
         <div class="miscOptions" >
@@ -36,15 +38,19 @@
             </label>  
         </div>
 
-        
-
-
         <div class="textcols">
             <div class="textcols-item" id="firstCol" >
                 <label class="output1">Избегать моды: </label>
                 <p></p>
             </div>
             <div class="textcols-item" id="secondCol">
+                <div class="radiodiv" id="radiodiv">
+                    <p id="symb">Нужные моды...</p>
+                    <input type="radio" id="a1" name="fav_language" value="all" onchange="setRadioState(this);">
+                    <label for="a1">Все выбранные</label><br>   
+                    <input type="radio" id="a2" name="fav_language" value="any" onchange="setRadioState(this);" checked>
+                    <label for="a2">Хотя бы один из выбранных</label><br>
+                </div>
                 <label class="output1">Нужные моды: </label>
                 <p></p>
             </div>

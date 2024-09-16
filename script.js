@@ -3,7 +3,7 @@ const map1 = new Map();
 const dataPromise = fetchDict();
 let quantStr = "";
 let sizeStr = "";
-
+let ineedthismodstype="any";
 function fetchDict(){
     return fetch('dictionary_ru.json')
     .then(response => response.json())
@@ -14,7 +14,10 @@ function fetchDict(){
     })
     .catch(error => console.error('Ошибка при загрузке JSON:', error));
 }
-
+function setRadioState(src){
+    ineedthismodstype=src.value;
+    updateOutput();
+}
 function createCheckboxes() {
     let checkboxContainer = document.getElementById('firstCol');
 
@@ -74,41 +77,69 @@ function updateQuantAndSizeStr2(){
 }
 function updateOutput() {
     //Bad chechboxes
-    let finalStr = "";
-    let badStr = filterCheckedAndGetFormattedString("firstCol");
-    let goodStr = filterCheckedAndGetFormattedString("secondCol");
-    if(badStr.length!=0){
-        finalStr += " \"!"+badStr+"\"";
-    }
-    if(goodStr.length!=0){
-        if(finalStr.length!=0)
-            finalStr+=" ";
-        finalStr += " \""+goodStr+"\"";
-    }
-    if(quantStr.length!=0)
-        finalStr = quantStr + " " + finalStr;
-    if(sizeStr.length!=0)
-        finalStr = sizeStr + " " + finalStr;
+    let finalStr = filterCheckedAndGetFormattedStringBad("firstCol");
+    let goodStr = filterCheckedAndGetFormattedStringGood("secondCol");
+    finalStr = goodStr.length=="" ? finalStr : finalStr +" "+goodStr;
+
+    finalStr = quantStr.length==0 ? finalStr : quantStr + " " + finalStr;
+    finalStr = sizeStr.length==0 ? finalStr : sizeStr + " " + finalStr;
     if(finalStr.length!=0){
         outputField.style.color= "#ffffff";
-        outputField.textContent =finalStr;
+        outputField.textContent =finalStr.substring(0,75);
     }else{
         outputField.style.color= "#838383";
         outputField.textContent = "Выберите хотя бы один из модов...";
     }
     inputTextField3.textContent = "Символов: " + finalStr.length + "/50"
+    inputTextField3.style.color = finalStr.length>50 ? "red" : "white";
 }
-function filterCheckedAndGetFormattedString(containerId){
+function filterCheckedAndGetFormattedStringBad(containerId){
     let finalStr = "";
     const container = document.getElementById(containerId);
     const checkboxes = container.querySelectorAll('input[type="checkbox"]');
     const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
-            
+    if(checkedCheckboxes.length==0)
+        return "";
     checkedCheckboxes.forEach(checkbox => finalStr+= `${checkbox.id}|`);
-    return finalStr.substring(0,finalStr.length-1);
+    return "\"!" + finalStr.substring(0,finalStr.length-1)+"\"";
+}
+function filterCheckedAndGetFormattedStringGood(containerId){
+    let finalStr = "";
+    const container = document.getElementById(containerId);
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+    if(checkedCheckboxes.length==0)
+        return "";
+    if(ineedthismodstype =="any"){
+        checkedCheckboxes.forEach(checkbox => finalStr+= `${checkbox.id}|`);
+        return "\"" +finalStr.substring(0,finalStr.length-1)+"\"";
+    }else{
+         checkedCheckboxes.forEach(checkbox => {
+             finalStr = (`${checkbox.id}`).includes(" ") ? finalStr + `\"${checkbox.id}\" ` : finalStr + `${checkbox.id} `;
+         });
+        return finalStr.substring(0,finalStr.length-1);
+    }
 }
 window.addEventListener('DOMContentLoaded', () => {
     dataPromise.then(() => {
         createCheckboxes();
     });
 });
+const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(outputField.textContent);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+const clearAll = async () => {
+    const container = document.getElementById("firstCol");
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    Array.from(checkboxes).forEach(checkbox=> checkbox.checked = false);
+
+    const container1 = document.getElementById("secondCol");
+    const checkboxes1 = container1.querySelectorAll('input[type="checkbox"]');
+    Array.from(checkboxes1).forEach(checkbox=> checkbox.checked = false);
+    updateOutput();
+  }
