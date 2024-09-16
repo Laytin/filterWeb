@@ -51,7 +51,7 @@ body {
   appearance: none;
   background-color: transparent;
   background-color: #008a17;
-  background-image: url("copyicon.png");
+  background-image: url("./copyicon.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 70%;
@@ -100,7 +100,7 @@ body {
   top:55px;
   appearance: none;
   background-color: transparent;
-  background-image: url("clearicon.png");
+  background-image: url("./clearicon.png");
   background-position: center;
   border-radius: 15px;
   box-sizing: border-box;
