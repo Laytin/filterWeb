@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="mainContainer">
         <div class="outputFieldBG">
@@ -22,24 +26,22 @@
             </div>
             <button class="button-28" role="button" onclick="copyContent()"></button>
             <button class="button-29" role="button" onclick="clearAll()"></button>
-
         </div>
         <p id="symb">Символов: 0/50</p>
-        <div class="miscOptions" >
+        <div class="miscOptions">
             <p></p>
-            <label class="output1" id="output11"> 
-                Мин. кол-во предметов:  
+            <label class="output1" id="output11">
+                Мин. кол-во предметов:
                 <input type="textbox" class="textboxClass" id="quant">
-            </label>  
+            </label>
             <p></p>
-            <label class="output1" id="output12"> 
-                Мин. кол-во мобов:  
+            <label class="output1" id="output12">
+                Мин. кол-во мобов:
                 <input type="textbox" class="textboxClass" id="packsize">
-            </label>  
+            </label>
         </div>
-
         <div class="textcols">
-            <div class="textcols-item" id="firstCol" >
+            <div class="textcols-item" id="firstCol">
                 <label class="output1">Избегать моды: </label>
                 <p></p>
             </div>
@@ -47,7 +49,7 @@
                 <div class="radiodiv" id="radiodiv">
                     <p id="symb">Нужные моды...</p>
                     <input type="radio" id="a1" name="fav_language" value="all" onchange="setRadioState(this);">
-                    <label for="a1">Все выбранные</label><br>   
+                    <label for="a1">Все выбранные</label><br>
                     <input type="radio" id="a2" name="fav_language" value="any" onchange="setRadioState(this);" checked>
                     <label for="a2">Хотя бы один из выбранных</label><br>
                 </div>
@@ -58,5 +60,14 @@
     </div>
     <script src="./deps/to-regex.js"></script>
     <script src="./script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL2KZGF64D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-HL2KZGF64D');
+    </script>
 </body>
+
 </html>
