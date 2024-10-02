@@ -63,14 +63,22 @@ inputTextField2.oninput = updateQuantAndSizeStr2;
 
 function updateQuantAndSizeStr1(){
     quantStr ="";
+    //во п пп 
     if(inputTextField1.value!="" && inputTextField1.value>0){
-        //console.log(toRegexRange(inputTextField1.value, 99999, {capture: true}))
+        if(inputTextField1.value<100)
+            quantStr = "\"дм.*" + toRegexRange(inputTextField1.value, 99, {capture:true}) + "%\""
+        if(inputTextField1.value>=100)
+            quantStr = "\"дм.*" + toRegexRange(inputTextField1.value, 199, {capture:true}) + "%\""
     }
     updateOutput();
 }
 function updateQuantAndSizeStr2(){
     sizeStr ="";
     if(inputTextField2.value!="" && inputTextField2.value>0){
+        if(inputTextField1.value<100)
+            sizeStr = "\"во п.*" + toRegexRange(inputTextField1.value, 99, {capture:true}) + "%\""
+        if(inputTextField1.value>=100)
+            sizeStr = "\"во п.*" + toRegexRange(inputTextField1.value, 199, {capture:true}) + "%\""
         //console.log(toRegexRange(inputTextField2.value, 99999, { capture: true }))
     }
     updateOutput();

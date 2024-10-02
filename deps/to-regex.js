@@ -82,7 +82,11 @@ const toRegexRange = (min, max, options) => {
   state.negatives = negatives;
   state.positives = positives;
   state.result = collatePatterns(negatives, positives, opts);
-
+  if(max<100)
+    if(`${state.result}`.includes("|[1-9]."))
+      state.result = state.result.replace("|[1-9].", '|\\d..?');
+    else
+      state.result+= "|1..";
   if (opts.capture === true) {
     state.result = `(${state.result})`;
   } else if (opts.wrap !== false && (positives.length + negatives.length) > 1) {
@@ -92,7 +96,6 @@ const toRegexRange = (min, max, options) => {
   toRegexRange.cache[cacheKey] = state;
   return state.result;
 };
-
 function collatePatterns(neg, pos, options) {
   let onlyNegative = filterPatterns(neg, pos, '-', false, options) || [];
   let onlyPositive = filterPatterns(pos, neg, '', false, options) || [];
@@ -104,8 +107,10 @@ function collatePatterns(neg, pos, options) {
 function splitToRanges(min, max) {
   let nines = 1;
   let zeros = 1;
-
   let stop = countNines(min, nines);
+  if(min.length==max.length && min%10 === 0){
+    stop = max;
+  }
   let stops = new Set([max]);
 
   while (min <= stop && stop <= max) {
@@ -152,16 +157,13 @@ function rangeToPattern(start, stop, options) {
 
     } else if (startDigit !== '0' || stopDigit !== '9') {
       pattern += toCharacterClass(startDigit, stopDigit, options);
-
     } else {
       count++;
     }
   }
-
   if (count) {
     pattern += options.shorthand === true ? '\\d' : '.';
   }
-
   return { pattern, count: [count], digits };
 }
 
@@ -190,7 +192,6 @@ function splitToPatterns(min, max, tok, options) {
     if (tok.isPadded) {
       zeros = padZeros(max, tok, options);
     }
-
     obj.string = zeros + obj.pattern + toQuantifier(obj.count);
     tokens.push(obj);
     start = max + 1;
@@ -265,10 +266,8 @@ function padZeros(value, tok, options) {
   if (!tok.isPadded) {
     return value;
   }
-
   let diff = Math.abs(tok.maxLen - String(value).length);
   let relax = options.relaxZeros !== false;
-
   switch (diff) {
     case 0:
       return '';
