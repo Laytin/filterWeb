@@ -60,7 +60,6 @@ var inputTextField3 = document.getElementById('symb')
 inputTextField1.oninput = updateQuantAndSizeStr1;
 inputTextField2.oninput = updateQuantAndSizeStr2;
 
-
 function updateQuantAndSizeStr1(){
     quantStr ="";
     //во п пп 
@@ -78,11 +77,11 @@ function updateQuantAndSizeStr2(){
     sizeStr ="";
     if(inputTextField2.value!="" && inputTextField2.value>0){
         if(inputTextField2.value<100)
-            sizeStr = "\"во п.*" + toRegexRange(inputTextField2.value, 99, {capture:true}) + "%\""
+            sizeStr = "\"пп.*" + toRegexRange(inputTextField2.value, 99, {capture:true}) + "%\""
         if(inputTextField2.value>=100)
-            sizeStr = "\"во п.*" + toRegexRange(inputTextField2.value, 199, {capture:true}) + "%\""
+            sizeStr = "\"пп.*" + toRegexRange(inputTextField2.value, 199, {capture:true}) + "%\""
         if(inputTextField2.value>=200)
-            sizeStr = "\"во п.*" + parseInt(inputTextField2.value /100) + "..%\""
+            sizeStr = "\"пп.*" + parseInt(inputTextField2.value /100) + "..%\""
         //console.log(toRegexRange(inputTextField2.value, 99999, { capture: true }))
     }
     updateOutput();
