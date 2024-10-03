@@ -152,5 +152,7 @@ const clearAll = async () => {
     const container1 = document.getElementById("secondCol");
     const checkboxes1 = container1.querySelectorAll('input[type="checkbox"]');
     Array.from(checkboxes1).forEach(checkbox=> checkbox.checked = false);
+    inputTextField1.value = "0";
+    inputTextField2.value = "0";
     updateOutput();
   }
