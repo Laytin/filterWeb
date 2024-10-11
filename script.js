@@ -57,12 +57,28 @@ var inputTextField1 = document.getElementById('quant')
 var inputTextField2 = document.getElementById('packsize')
 var inputTextField3 = document.getElementById('symb')
 
+var inputTextField4 = document.getElementById('firstSearch')
+var inputTextField5 = document.getElementById('secondSearch')
+
 inputTextField1.oninput = updateQuantAndSizeStr1;
 inputTextField2.oninput = updateQuantAndSizeStr2;
 
+inputTextField4.oninput = updateSearch1;
+inputTextField5.oninput = updateSearch2;
+
+function updateSearch1(){
+    const container = document.getElementById("firstCol");
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    Array.from(checkboxes).forEach(checkbox=> checkbox.parentElement.style.visibility=false);
+}
+function updateSearch2(){
+    const container = document.getElementById("secondCol");
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    Array.from(checkboxes).forEach(checkbox=> checkbox.visibility = false);
+}
+
 function updateQuantAndSizeStr1(){
     quantStr ="";
-    //во п пп 
     if(inputTextField1.value!="" && inputTextField1.value>0){
         if(inputTextField1.value<100)
             quantStr = "\"дм.*" + toRegexRange(inputTextField1.value, 99, {capture:true}) + "%\""
